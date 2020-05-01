@@ -20,9 +20,7 @@ return {
 },
   methods:{
     addList:function () {
-      this.list.push({
-
-      })
+      this.list.push({})
       },
     }
 };
