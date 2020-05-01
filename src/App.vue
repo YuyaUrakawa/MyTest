@@ -3,8 +3,9 @@
     <h1>することリスト</h1>
     <input type="text" v-model="input">
     <button v-on:click="addList">追加</button>
-    <li v-for="item in list" v-bind:key="item.todo">{{item.todo}}
-    </li>
+    <!--<li v-for="item in list" v-bind:key="item.todo">{{item.todo}}
+    </li>-->
+    {{$data}}
     <router-view />
   </div>
 </template>
@@ -16,11 +17,16 @@ export default {
   name: 'App',
     data: function() {
 return {
+  input:'',
+  todos:[]
   };
 },
   methods:{
     addList:function () {
-      this.list.push({})
+      let todo ={
+        item:this.input
+      };
+      this.todos.push(todo)
       },
     }
 };
