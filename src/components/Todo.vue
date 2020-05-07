@@ -1,12 +1,67 @@
 <template>
     <div>
+        <h1>することリスト</h1>
+        <input type="text" v-model="input" ref="editor">
+        <form v-on:click="addList">
+            <button click="btn btn-primary" type="submit">@{{changeButton}}</button>
+        </form>
+        <ul>
+            <li v-for="(item, index) in todos" v-bind:key="item.input">@{{item.input}}
+                <button class="btn btn-xs btn-info" v-on:click="edit(index)"><span>編集</span></button>
+                <button class="btn btn-xs btn-warning" v-on:click="remove(index)"><span>削除</span></button>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
     export default {
-        name: "Todo"
-    }
+        name: "Todo",
+        data: function() {
+            return {
+                input: "",
+                editInput: -1,
+                todos:[]
+            };
+        },
+        //編集
+        computed:{
+            changeButton() {
+                return this.editIndex === -1 ? "追加" : "編集";
+            }
+        },
+        methods:{
+            //送信ボタンをクリックしたら以下を実行
+            addList(){
+                if(this.editIndex === -1){
+                    this.todos.push(
+                        this.input
+                )} else {
+                        this.todos.splice(
+                            this.editIndex, 1, this.input
+                        );
+                    }
+                    this.cancel();
+                    },
+                //クリア
+                cancel(){
+                    this.input = "";
+                    this.editIndex= -1;
+                },
+                //編集
+                edit(index){
+                    this.editIndex = index;
+                    this.input = this.todos[index];
+                    this.$refs.editor.focus();//フォーカスを設定
+                },
+                //削除
+                remove(index){
+                    if(confirm('削除しますか')) {
+                        this.todos.splice(index, 1);
+                    }
+                },
+            },
+        }
 </script>
 
 <style scoped>
