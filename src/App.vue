@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <h1>することリスト</h1>
-    <input type="text" v-model="input">
-    <button v-on:click="addList">追加</button>
-    <!--<li v-for="item in list" v-bind:key="item.todo">{{item.todo}}
-    </li>-->
-    {{$data}}
+      <h1>することリスト</h1>
+     <input type="text" v-model="input">
+      <button v-on:click="addList">追加</button>
+    <ul>
+      <li v-for="item in todos" v-bind:key="item.input">{{item.input}}
+      </li>
+    </ul>
     <router-view />
   </div>
 </template>
@@ -23,10 +24,9 @@ return {
 },
   methods:{
     addList:function () {
-      let todo ={
-        item:this.input
-      };
-      this.todos.push(todo)
+      this.todos.push({
+          input:this.input
+      })
       },
     }
 };
