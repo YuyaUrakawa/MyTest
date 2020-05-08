@@ -1,14 +1,14 @@
 <template>
     <div>
-        <h1>することリスト</h1>
+        <h1>Todoリスト</h1>
         <input type="text" v-model="input" ref="editor">
-        <form v-on:click="addList">
-            <button click="btn btn-primary" type="submit">@{{changeButton}}</button>
+        <form v-on:submit.prevent="addList">
+            <button click="btn btn-primary" type="submit">{{changeButton}}</button>
         </form>
         <ul>
-            <li v-for="(item, index) in todos" v-bind:key="item.input">@{{item.input}}
-                <button class="btn btn-xs btn-info" v-on:click="edit(index)"><span>編集</span></button>
-                <button class="btn btn-xs btn-warning" v-on:click="remove(index)"><span>削除</span></button>
+            <li v-for="(item, index) in todos" v-bind:key="item">{{item}}
+                <button class="btn btn-info" v-on:click="edit(index)"><span>編集</span></button>
+                <button class="btn btn-warning" v-on:click="remove(index)"><span>削除</span></button>
             </li>
         </ul>
     </div>
@@ -20,7 +20,7 @@
         data: function() {
             return {
                 input: "",
-                editInput: -1,
+                editIndex: -1,
                 todos:[]
             };
         },
@@ -32,27 +32,29 @@
         },
         methods:{
             //送信ボタンをクリックしたら以下を実行
-            addList(){
+            addList:function(){
+                //追加
                 if(this.editIndex === -1){
                     this.todos.push(
                         this.input
                 )} else {
                         this.todos.splice(
-                            this.editIndex, 1, this.input
+                            this.editIndex,1, this.input,
                         );
                     }
                     this.cancel();
                     },
                 //クリア
                 cancel(){
-                    this.input = "";
-                    this.editIndex= -1;
+                    this.input = '';
+                    this.editIndex = -1;
                 },
                 //編集
                 edit(index){
                     this.editIndex = index;
                     this.input = this.todos[index];
-                    this.$refs.editor.focus();//フォーカスを設定
+                    this.$refs.editor.focus();
+                    //return this.editIndex = 0;
                 },
                 //削除
                 remove(index){
