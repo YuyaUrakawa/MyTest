@@ -1,48 +1,48 @@
 <template>
     <div>
         <h1>メッセージ</h1>
-        <head>
-            <tr>
+            <!--<tr>
                 <th class="id">ID</th>
                 <th class="message">コメント</th>
                 <th class="time">時間</th>
-            </tr>
-        </head>
-        <body>
-            <tr v-for="item in messageList" v-bind:key="item.id">
-                <th>{{item.id}}</th>
+            </tr>-->
+        <input class="inputMessage" type="text" v-model="message" placeholder="内容を入力してください。">
+        <from v-on:submit.prevent="addButton">
+              <button click="btn btn-primary" type="submit">送信</button>
+        </from>
+        <ul>
+            <li v-for="(item, index) in messageList" v-bind:key="item">
+                {{item}}
+                {{$data}}
+                <button class="btn btn-warning" v-on:click="remove(index)"><span>削除</span></button>
+                <!--<th>{{item.id}}</th>
                 <th>{{item.message}}</th>
-                <th>{{item.time}}</th>
-            </tr>
-        </body>
-
-        <!--メッセージ入力欄及び送信ボタン-->
-        <input class="inputMessage" type="text" ref="message" placeholder="内容を入力してください。">
-        <button v-on:submit.prevent="addButton" class="addButton" click="btn btn-primary" type="submit">送信</button>
+                <th>{{item.time}}</th>-->
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
+    //import main from './main.js'
     export default {
         name: "Message",
         data:function () {
             return{
-                message:'',
+                message: "",
                 messageList:[]
             }
         },
         methods:{
-            addButton: function (event, value) {
-                var message = this.$refs.message
-                if(!message.value.length){
-                    return
+            //送信ボタン
+            addButton:function () {
+                this.messageList.push(this.message)
+            },
+            remove(index){
+                if(confirm('削除しますか')) {
+                    this.todos.splice(index, 1);
                 }
-                this.messageList.push({
-                    id: messageStorage.uid++,
-                    message: message.value,
-                })
-                message.value= ''
-            }
+            },
         }
     }
 </script>
