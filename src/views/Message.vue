@@ -1,5 +1,7 @@
 <template>
     <div>
+        <router-link to="/home">ホーム</router-link>
+        <router-link to="/todo">することリスト</router-link>
         <h1>メッセージ</h1>
             <!--<tr>
                 <th class="id">ID</th>

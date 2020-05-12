@@ -1,5 +1,7 @@
 <template>
     <div>
+        <router-link to="/home">ホーム</router-link>
+        <router-link to="/message">メッセージ</router-link>
         <h1>Todoリスト</h1>
         <input type="text" v-model="input" ref="editor">
         <form v-on:submit.prevent="addList">

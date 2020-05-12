@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <router-link to="/">ログイン   </router-link>
-    <router-link to="/home">ホーム   </router-link>
-    <router-link to="/todo">することリスト  </router-link>
-    <router-link to="/message">メッセージ</router-link>
     <router-view />
   </div>
 </template>

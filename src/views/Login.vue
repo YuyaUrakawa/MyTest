@@ -7,12 +7,13 @@
             <li class="loginPass">パスワード</li>
             <input type="password">
             <li>
-                <button class="btn btn-primary" type="submit">ログイン</button>
+                <router-link :to="{name:'Login-home'}" button class="btn btn-primary"  type="submit" >home</router-link>
             </li>
             <li>
                 <button class="btn btn-primary" type="submit">Googleアカウントでログイン</button>
             </li>
         </div>
+        <router-view />
     </div>
 </template>
 
